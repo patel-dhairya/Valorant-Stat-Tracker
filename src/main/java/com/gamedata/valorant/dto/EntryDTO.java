@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AgentDTO {
+public class EntryDTO {
     private String userName;
     private int matchID;
     private String agentName;
