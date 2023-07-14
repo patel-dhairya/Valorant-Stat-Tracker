@@ -1,3 +1,5 @@
+// This code structure follows layered architecture. Controller layer will take request from client and pass it to service
+
 package com.gamedata.valorant.controller;
 
 import com.gamedata.valorant.dto.EntryDTO;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class EntryController {
 
-    // Let the spring handle dependency injection
+    // Let the spring handle dependency injection and pass the data to entryService
     @Autowired
     private EntryService entryService;
     //

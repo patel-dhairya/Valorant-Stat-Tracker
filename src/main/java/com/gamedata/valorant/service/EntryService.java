@@ -1,3 +1,5 @@
+// This code structure follows layered architecture. It receives request from Controller and will perform
+// necessary business logic.
 // Follows Factory design pattern for implementation
 // Help with case of  multiple implementation class of same interface
 
