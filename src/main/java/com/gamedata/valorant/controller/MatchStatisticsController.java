@@ -2,8 +2,8 @@
 
 package com.gamedata.valorant.controller;
 
-import com.gamedata.valorant.dto.EntryDTO;
-import com.gamedata.valorant.service.EntryService;
+import com.gamedata.valorant.dto.MatchStatisticsDTO;
+import com.gamedata.valorant.service.MatchStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
-public class EntryController {
+public class MatchStatisticsController {
 
     // Let the spring handle dependency injection and pass the data to entryService
     @Autowired
-    private EntryService entryService;
+    private MatchStatisticsService matchStatisticsService;
     //
     @PostMapping("/stat")
-    public EntryDTO saveAgentStat(@RequestBody EntryDTO entryDTO){
-        entryService.saveEntry(entryDTO);
-        System.out.println(entryDTO);
-        return entryDTO;
+    public MatchStatisticsDTO saveAgentStat(@RequestBody MatchStatisticsDTO matchStatisticsDTO){
+        matchStatisticsService.saveMatchStatistics(matchStatisticsDTO);
+        return matchStatisticsDTO;
     }
 
 }

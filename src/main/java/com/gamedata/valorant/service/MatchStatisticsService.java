@@ -5,8 +5,8 @@
 
 package com.gamedata.valorant.service;
 
-import com.gamedata.valorant.dto.EntryDTO;
+import com.gamedata.valorant.dto.MatchStatisticsDTO;
 
-public interface EntryService {
-    public EntryDTO saveEntry(EntryDTO entryDTO);
+public interface MatchStatisticsService {
+    public MatchStatisticsDTO saveMatchStatistics(MatchStatisticsDTO matchStatisticsDTO);
 }

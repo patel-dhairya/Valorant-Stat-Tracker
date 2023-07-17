@@ -2,17 +2,18 @@
 
 package com.gamedata.valorant.entity;
 
+import com.gamedata.valorant.utility.MatchScore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="ENTRY_TABLE")
+@Table(name="MATCH_STATISTICS_TABLE")
 @Getter
 @Setter
 @NoArgsConstructor
-public class EntryEntity {
+public class MatchStatisticsEntity {
     // Generate auto increment id for each entry
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,4 +34,6 @@ public class EntryEntity {
     private int firstKills;
     @Column(nullable = false)
     private int firstDeaths;
+    @Column(nullable = false)
+    private MatchScore matchScore;
 }
