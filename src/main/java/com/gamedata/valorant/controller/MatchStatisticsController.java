@@ -5,6 +5,9 @@ package com.gamedata.valorant.controller;
 import com.gamedata.valorant.dto.MatchStatisticsDTO;
 import com.gamedata.valorant.service.MatchStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +22,10 @@ public class MatchStatisticsController {
     private MatchStatisticsService matchStatisticsService;
     //
     @PostMapping("/stat")
-    public MatchStatisticsDTO saveAgentStat(@RequestBody MatchStatisticsDTO matchStatisticsDTO){
-        matchStatisticsService.saveMatchStatistics(matchStatisticsDTO);
-        return matchStatisticsDTO;
+    public ResponseEntity<MatchStatisticsDTO> saveAgentStat(@RequestBody MatchStatisticsDTO matchStatisticsDTO){
+        matchStatisticsDTO = matchStatisticsService.saveMatchStatistics(matchStatisticsDTO);
+        ResponseEntity<MatchStatisticsDTO> responseEntity = new ResponseEntity<>(matchStatisticsDTO, HttpStatus.CREATED);
+        return responseEntity;
     }
 
 }

@@ -11,6 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MatchStatisticsDTO {
+
+    private Long id;
+
     // Username of the player
     private String userName;
 
@@ -36,5 +39,6 @@ public class MatchStatisticsDTO {
     private int firstDeaths;
 
     // Scores of that match. Look at MatchScore class for more information
-    private MatchScore matchScore;
+    private int userScore;
+    private int opponentScore;
 }

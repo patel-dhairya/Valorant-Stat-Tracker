@@ -16,7 +16,7 @@ import lombok.Setter;
 public class MatchStatisticsEntity {
     // Generate auto increment id for each entry
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String userName;
@@ -35,5 +35,8 @@ public class MatchStatisticsEntity {
     @Column(nullable = false)
     private int firstDeaths;
     @Column(nullable = false)
-    private MatchScore matchScore;
+    private int userScore;
+    @Column(nullable = false)
+    private int opponentScore;
+
 }

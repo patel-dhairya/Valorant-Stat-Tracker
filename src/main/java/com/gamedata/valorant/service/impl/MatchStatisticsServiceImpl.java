@@ -1,5 +1,7 @@
+// Service layer in CSR data architecture(Controller, Service, Repository)
 package com.gamedata.valorant.service.impl;
 
+import com.gamedata.valorant.converter.MatchStatisticsConverter;
 import com.gamedata.valorant.dto.MatchStatisticsDTO;
 import com.gamedata.valorant.entity.MatchStatisticsEntity;
 import com.gamedata.valorant.repository.MatchStatisticsRepository;
@@ -15,22 +17,16 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
     @Autowired
     private MatchStatisticsRepository matchStatisticsRepository;
 
+    @Autowired
+    private MatchStatisticsConverter matchStatisticsConverter;
+
     @Override
     public MatchStatisticsDTO saveMatchStatistics(MatchStatisticsDTO matchStatisticsDTO) {
 
-
-        MatchStatisticsEntity matchStatisticsEntity = new MatchStatisticsEntity();
-        matchStatisticsEntity.setUserName(matchStatisticsDTO.getUserName());
-        matchStatisticsEntity.setMatchID(matchStatisticsDTO.getMatchID());
-        matchStatisticsEntity.setAgentName(matchStatisticsDTO.getAgentName());
-        matchStatisticsEntity.setKills(matchStatisticsDTO.getKills());
-        matchStatisticsEntity.setDeaths(matchStatisticsDTO.getDeaths());
-        matchStatisticsEntity.setAssists(matchStatisticsDTO.getAssists());
-        matchStatisticsEntity.setFirstKills(matchStatisticsDTO.getFirstDeaths());
-        matchStatisticsEntity.setFirstDeaths(matchStatisticsDTO.getFirstDeaths());
-        matchStatisticsEntity.setMatchScore(matchStatisticsDTO.getMatchScore());
-
-        matchStatisticsRepository.save(matchStatisticsEntity);
-        return null;
+        MatchStatisticsEntity matchStatisticsEntity = matchStatisticsConverter.convertDTO(matchStatisticsDTO);
+        // Send the data to repository layer
+        matchStatisticsEntity = matchStatisticsRepository.save(matchStatisticsEntity);
+        matchStatisticsDTO = matchStatisticsConverter.convertEntity(matchStatisticsEntity);
+        return matchStatisticsDTO;
     }
 }
