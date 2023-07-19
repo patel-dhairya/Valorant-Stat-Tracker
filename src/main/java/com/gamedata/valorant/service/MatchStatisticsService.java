@@ -7,6 +7,11 @@ package com.gamedata.valorant.service;
 
 import com.gamedata.valorant.dto.MatchStatisticsDTO;
 
+import java.util.List;
+
 public interface MatchStatisticsService {
-    public MatchStatisticsDTO saveMatchStatistics(MatchStatisticsDTO matchStatisticsDTO);
+    MatchStatisticsDTO saveMatchStatistics(MatchStatisticsDTO matchStatisticsDTO);
+
+    // Return all the saved entries
+    List<MatchStatisticsDTO> getAllStatistics();
 }

@@ -9,6 +9,9 @@ import com.gamedata.valorant.service.MatchStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 // Make EntryServiceImpl class singleton instance to make it more memory efficient
 @Service
@@ -28,5 +31,18 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
         matchStatisticsEntity = matchStatisticsRepository.save(matchStatisticsEntity);
         matchStatisticsDTO = matchStatisticsConverter.convertEntity(matchStatisticsEntity);
         return matchStatisticsDTO;
+    }
+
+    @Override
+    public List<MatchStatisticsDTO> getAllStatistics() {
+        List<MatchStatisticsDTO> matchStatisticsDTOList = new ArrayList<>();
+
+        // Find all user entries in entity format and convert to DTO to return back to controller
+        List<MatchStatisticsEntity> matchStatisticsEntityList = (List<MatchStatisticsEntity>)matchStatisticsRepository.findAll();
+        for(MatchStatisticsEntity matchStatisticsEntity: matchStatisticsEntityList){
+            MatchStatisticsDTO matchStatisticsDTO = matchStatisticsConverter.convertEntity(matchStatisticsEntity);
+            matchStatisticsDTOList.add(matchStatisticsDTO);
+        }
+        return matchStatisticsDTOList;
     }
 }
