@@ -32,4 +32,11 @@ public class MatchStatisticsController {
         return responseEntity;
     }
 
+    @PutMapping("/stat/{entryId}")
+    public ResponseEntity<MatchStatisticsDTO> updateMatchStatistics(@RequestBody MatchStatisticsDTO matchStatisticsDTO, @PathVariable Long entryId){
+        matchStatisticsDTO = matchStatisticsService.updateMatchStatistics(matchStatisticsDTO, entryId);
+        ResponseEntity<MatchStatisticsDTO> responseEntity = new ResponseEntity<>(matchStatisticsDTO, HttpStatus.CREATED);
+        return responseEntity;
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 // Make EntryServiceImpl class singleton instance to make it more memory efficient
@@ -45,4 +46,33 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
         }
         return matchStatisticsDTOList;
     }
+
+    @Override
+    public MatchStatisticsDTO updateMatchStatistics(MatchStatisticsDTO newMatchStatisticsDTO, Long entryID) {
+        // Return type of findById is optional in case entry does not exist
+        Optional<MatchStatisticsEntity> matchStatisticsEntityOptional = matchStatisticsRepository.findById(entryID);
+        MatchStatisticsDTO updatedDTO = null;
+        // Check if valid entry exist for given entryID
+        if(matchStatisticsEntityOptional.isPresent()){
+            MatchStatisticsEntity matchStatisticsEntity = matchStatisticsEntityOptional.get();
+            matchStatisticsEntity.setAgentName(newMatchStatisticsDTO.getAgentName());
+            matchStatisticsEntity.setAssists(newMatchStatisticsDTO.getAssists());
+            matchStatisticsEntity.setUserName(newMatchStatisticsDTO.getUserName());
+            matchStatisticsEntity.setMatchID(newMatchStatisticsDTO.getMatchID());
+            matchStatisticsEntity.setKills(newMatchStatisticsDTO.getKills());
+            matchStatisticsEntity.setDeaths(newMatchStatisticsDTO.getDeaths());
+            matchStatisticsEntity.setAssists(newMatchStatisticsDTO.getAssists());
+            matchStatisticsEntity.setFirstKills(newMatchStatisticsDTO.getFirstDeaths());
+            matchStatisticsEntity.setFirstDeaths(newMatchStatisticsDTO.getFirstDeaths());
+            matchStatisticsEntity.setUserScore(newMatchStatisticsDTO.getUserScore());
+            matchStatisticsEntity.setOpponentScore(newMatchStatisticsDTO.getOpponentScore());
+
+            updatedDTO = matchStatisticsConverter.convertEntity(matchStatisticsEntity);
+            // save the new updated entry
+            matchStatisticsRepository.save(matchStatisticsEntity);
+        }
+        return updatedDTO;
+    }
+
+
 }

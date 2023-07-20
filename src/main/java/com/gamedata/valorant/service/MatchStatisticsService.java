@@ -14,4 +14,7 @@ public interface MatchStatisticsService {
 
     // Return all the saved entries
     List<MatchStatisticsDTO> getAllStatistics();
+
+    // Update any single entry in case wrong data was given
+    MatchStatisticsDTO updateMatchStatistics(MatchStatisticsDTO newMatchStatisticsDTO, Long entryID);
 }
