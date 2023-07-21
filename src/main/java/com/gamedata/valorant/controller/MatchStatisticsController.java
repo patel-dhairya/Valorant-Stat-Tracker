@@ -35,7 +35,23 @@ public class MatchStatisticsController {
     @PutMapping("/stat/{entryId}")
     public ResponseEntity<MatchStatisticsDTO> updateMatchStatistics(@RequestBody MatchStatisticsDTO matchStatisticsDTO, @PathVariable Long entryId){
         matchStatisticsDTO = matchStatisticsService.updateMatchStatistics(matchStatisticsDTO, entryId);
+        // Entry not found
+        if (matchStatisticsDTO == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         ResponseEntity<MatchStatisticsDTO> responseEntity = new ResponseEntity<>(matchStatisticsDTO, HttpStatus.CREATED);
+        return responseEntity;
+    }
+
+    // This endpoint is used when one does not need to update entire entry and only wants update required values
+    @PatchMapping("/stat/{entryId}")
+    public ResponseEntity<MatchStatisticsDTO> partialUpdateMatchStatistics(@RequestBody MatchStatisticsDTO matchStatisticsDTO, @PathVariable Long entryId){
+        matchStatisticsDTO = matchStatisticsService.partialUpdateMatchStatistics(matchStatisticsDTO, entryId);
+        // Entry not found
+        if (matchStatisticsDTO == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        ResponseEntity<MatchStatisticsDTO> responseEntity = new ResponseEntity<>(matchStatisticsDTO, HttpStatus.OK);
         return responseEntity;
     }
 

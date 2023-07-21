@@ -61,8 +61,7 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
             matchStatisticsEntity.setMatchID(newMatchStatisticsDTO.getMatchID());
             matchStatisticsEntity.setKills(newMatchStatisticsDTO.getKills());
             matchStatisticsEntity.setDeaths(newMatchStatisticsDTO.getDeaths());
-            matchStatisticsEntity.setAssists(newMatchStatisticsDTO.getAssists());
-            matchStatisticsEntity.setFirstKills(newMatchStatisticsDTO.getFirstDeaths());
+            matchStatisticsEntity.setFirstKills(newMatchStatisticsDTO.getFirstKills());
             matchStatisticsEntity.setFirstDeaths(newMatchStatisticsDTO.getFirstDeaths());
             matchStatisticsEntity.setUserScore(newMatchStatisticsDTO.getUserScore());
             matchStatisticsEntity.setOpponentScore(newMatchStatisticsDTO.getOpponentScore());
@@ -74,5 +73,42 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
         return updatedDTO;
     }
 
+    @Override
+    public MatchStatisticsDTO partialUpdateMatchStatistics(MatchStatisticsDTO partialMatchStatisticsDTO, Long entryId) {
+        // Return type of findById is optional in case entry does not exist
+        Optional<MatchStatisticsEntity> matchStatisticsEntityOptional = matchStatisticsRepository.findById(entryId);
+        MatchStatisticsDTO updatedDTO = null;
 
+        // Check if valid entry exists for given entryId
+        if (matchStatisticsEntityOptional.isPresent()) {
+            MatchStatisticsEntity matchStatisticsEntity = matchStatisticsEntityOptional.get();
+            // Check if at least one field is non-null in the partialMatchStatisticsDTO
+            if (isAnyFieldNonNull(partialMatchStatisticsDTO)) {
+                // Check which fields are present in the partialMatchStatisticsDTO and update them accordingly
+                Optional.ofNullable(partialMatchStatisticsDTO.getAgentName()).ifPresent(matchStatisticsEntity::setAgentName);
+                Optional.ofNullable(partialMatchStatisticsDTO.getAssists()).ifPresent(matchStatisticsEntity::setAssists);
+                Optional.ofNullable(partialMatchStatisticsDTO.getUserName()).ifPresent(matchStatisticsEntity::setUserName);
+                Optional.ofNullable(partialMatchStatisticsDTO.getMatchID()).ifPresent(matchStatisticsEntity::setMatchID);
+                Optional.ofNullable(partialMatchStatisticsDTO.getKills()).ifPresent(matchStatisticsEntity::setKills);
+                Optional.ofNullable(partialMatchStatisticsDTO.getDeaths()).ifPresent(matchStatisticsEntity::setDeaths);
+                Optional.ofNullable(partialMatchStatisticsDTO.getFirstKills()).ifPresent(matchStatisticsEntity::setFirstKills);
+                Optional.ofNullable(partialMatchStatisticsDTO.getFirstDeaths()).ifPresent(matchStatisticsEntity::setFirstDeaths);
+                Optional.ofNullable(partialMatchStatisticsDTO.getUserScore()).ifPresent(matchStatisticsEntity::setUserScore);
+                Optional.ofNullable(partialMatchStatisticsDTO.getOpponentScore()).ifPresent(matchStatisticsEntity::setOpponentScore);
+                updatedDTO = matchStatisticsConverter.convertEntity(matchStatisticsEntity);
+                matchStatisticsRepository.save(matchStatisticsEntity);
+            }
+        }
+        return updatedDTO;
+    }
+
+    private boolean isAnyFieldNonNull(MatchStatisticsDTO matchStatisticsDTO) {
+        // Check if at least one field is non-null in the MatchStatisticsDTO
+        return matchStatisticsDTO.getAgentName() != null || matchStatisticsDTO.getAssists() != null ||
+                matchStatisticsDTO.getUserName() != null || matchStatisticsDTO.getMatchID() != null ||
+                matchStatisticsDTO.getKills() != null || matchStatisticsDTO.getDeaths() != null ||
+                matchStatisticsDTO.getFirstKills() != null || matchStatisticsDTO.getFirstDeaths() != null ||
+                matchStatisticsDTO.getUserScore() != null || matchStatisticsDTO.getOpponentScore() != null;
+        // Return true if any field is non-null
+    }
 }
