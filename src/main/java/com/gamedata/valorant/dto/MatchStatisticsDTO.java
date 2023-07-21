@@ -18,27 +18,27 @@ public class MatchStatisticsDTO {
     private String userName;
 
     // Match ID of the match played by the player
-    private int matchID;
+    private String matchID;
 
     // Agent picked by the player for that matchID
     private String agentName;
 
     // Number of kills achieved by the player
-    private int kills;
+    private String kills;
 
     // Number of times the player died
-    private int deaths;
+    private String deaths;
 
     // Number of assists achieved by the player
-    private int assists;
+    private String assists;
 
     // Number of first kills achieved by the player
-    private int firstKills;
+    private String firstKills;
 
     // Number of times the player died first in a round
-    private int firstDeaths;
+    private String firstDeaths;
 
     // Scores of that match. Look at MatchScore class for more information
-    private int userScore;
-    private int opponentScore;
+    private String userScore;
+    private String opponentScore;
 }

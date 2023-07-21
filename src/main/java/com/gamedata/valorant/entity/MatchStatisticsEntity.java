@@ -21,22 +21,22 @@ public class MatchStatisticsEntity {
     @Column(nullable = false)
     private String userName;
     @Column(nullable = false)
-    private int matchID;
+    private String matchID;
     @Column(nullable = false)
     private String agentName;
     @Column(nullable = false)
-    private int kills;
+    private String kills;
     @Column(nullable = false)
-    private int deaths;
+    private String deaths;
     @Column(nullable = false)
-    private int assists;
+    private String assists;
     @Column(nullable = false)
-    private int firstKills;
+    private String firstKills;
     @Column(nullable = false)
-    private int firstDeaths;
+    private String firstDeaths;
     @Column(nullable = false)
-    private int userScore;
+    private String userScore;
     @Column(nullable = false)
-    private int opponentScore;
+    private String opponentScore;
 
 }
