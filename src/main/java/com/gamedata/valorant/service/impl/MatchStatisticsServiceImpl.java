@@ -111,4 +111,18 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
                 matchStatisticsDTO.getUserScore() != null || matchStatisticsDTO.getOpponentScore() != null;
         // Return true if any field is non-null
     }
+
+    // Delete entry for given entry id if it exists.
+    @Override
+    public void deleteMatchStatistics(Long entryId) {
+        // Return type of findById is optional in case entry does not exist
+        Optional<MatchStatisticsEntity> matchStatisticsEntityOptional = matchStatisticsRepository.findById(entryId);
+
+        // Check if valid entry exists for given entryId
+        if (matchStatisticsEntityOptional.isPresent()) {
+            matchStatisticsRepository.deleteById(entryId);
+        }
+    }
+
+
 }

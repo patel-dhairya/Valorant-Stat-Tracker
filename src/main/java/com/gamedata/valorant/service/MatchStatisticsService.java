@@ -25,4 +25,7 @@ public interface MatchStatisticsService {
     // The fields that are present in the matchStatisticsDTO parameter will be updated,
     // and the fields that are not present will remain unchanged.
     MatchStatisticsDTO partialUpdateMatchStatistics(MatchStatisticsDTO matchStatisticsDTO, Long entryId);
+
+    // Delete entry for given id if it exists in database
+    void deleteMatchStatistics(Long entryId);
 }

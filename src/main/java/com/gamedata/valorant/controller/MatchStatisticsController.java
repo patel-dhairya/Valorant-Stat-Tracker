@@ -55,4 +55,13 @@ public class MatchStatisticsController {
         return responseEntity;
     }
 
+    // This endpoint is used when user wants to delete existing entry by providing associated entryId.
+    // It assumes that entryId is correct and it exists
+    @DeleteMapping("/stat/{entryId}")
+    public ResponseEntity deleteMatchStatistics(@PathVariable Long entryId){
+        matchStatisticsService.deleteMatchStatistics(entryId);
+        ResponseEntity<Void> responseEntity = new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        return responseEntity;
+    }
+
 }
