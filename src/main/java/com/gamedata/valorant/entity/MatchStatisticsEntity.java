@@ -19,8 +19,6 @@ public class MatchStatisticsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String userName;
-    @Column(nullable = false)
     private String matchID;
     @Column(nullable = false)
     private String agentName;
