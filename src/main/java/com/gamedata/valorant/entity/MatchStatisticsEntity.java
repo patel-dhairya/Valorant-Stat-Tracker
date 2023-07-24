@@ -2,7 +2,6 @@
 
 package com.gamedata.valorant.entity;
 
-import com.gamedata.valorant.utility.MatchScore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

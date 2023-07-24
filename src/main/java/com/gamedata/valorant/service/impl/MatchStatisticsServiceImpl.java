@@ -57,7 +57,6 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
             MatchStatisticsEntity matchStatisticsEntity = matchStatisticsEntityOptional.get();
             matchStatisticsEntity.setAgentName(newMatchStatisticsDTO.getAgentName());
             matchStatisticsEntity.setAssists(newMatchStatisticsDTO.getAssists());
-            matchStatisticsEntity.setUserName(newMatchStatisticsDTO.getUserName());
             matchStatisticsEntity.setMatchID(newMatchStatisticsDTO.getMatchID());
             matchStatisticsEntity.setKills(newMatchStatisticsDTO.getKills());
             matchStatisticsEntity.setDeaths(newMatchStatisticsDTO.getDeaths());
@@ -87,7 +86,6 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
                 // Check which fields are present in the partialMatchStatisticsDTO and update them accordingly
                 Optional.ofNullable(partialMatchStatisticsDTO.getAgentName()).ifPresent(matchStatisticsEntity::setAgentName);
                 Optional.ofNullable(partialMatchStatisticsDTO.getAssists()).ifPresent(matchStatisticsEntity::setAssists);
-                Optional.ofNullable(partialMatchStatisticsDTO.getUserName()).ifPresent(matchStatisticsEntity::setUserName);
                 Optional.ofNullable(partialMatchStatisticsDTO.getMatchID()).ifPresent(matchStatisticsEntity::setMatchID);
                 Optional.ofNullable(partialMatchStatisticsDTO.getKills()).ifPresent(matchStatisticsEntity::setKills);
                 Optional.ofNullable(partialMatchStatisticsDTO.getDeaths()).ifPresent(matchStatisticsEntity::setDeaths);
@@ -105,7 +103,7 @@ public class MatchStatisticsServiceImpl implements MatchStatisticsService {
     private boolean isAnyFieldNonNull(MatchStatisticsDTO matchStatisticsDTO) {
         // Check if at least one field is non-null in the MatchStatisticsDTO
         return matchStatisticsDTO.getAgentName() != null || matchStatisticsDTO.getAssists() != null ||
-                matchStatisticsDTO.getUserName() != null || matchStatisticsDTO.getMatchID() != null ||
+                matchStatisticsDTO.getMatchID() != null ||
                 matchStatisticsDTO.getKills() != null || matchStatisticsDTO.getDeaths() != null ||
                 matchStatisticsDTO.getFirstKills() != null || matchStatisticsDTO.getFirstDeaths() != null ||
                 matchStatisticsDTO.getUserScore() != null || matchStatisticsDTO.getOpponentScore() != null;

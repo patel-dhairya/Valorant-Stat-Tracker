@@ -1,6 +1,5 @@
 package com.gamedata.valorant.dto;
 
-import com.gamedata.valorant.utility.MatchScore;
 import lombok.Getter;
 import lombok.Setter;
 

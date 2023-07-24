@@ -13,7 +13,6 @@ public class MatchStatisticsConverter {
         // Adapter design pattern as Repository layer expects Entity but controller layer sends DTO
         // Take data from controller layer in format of DTO and save it as Entity
         MatchStatisticsEntity matchStatisticsEntity = new MatchStatisticsEntity();
-        matchStatisticsEntity.setUserName(matchStatisticsDTO.getUserName());
         matchStatisticsEntity.setMatchID(matchStatisticsDTO.getMatchID());
         matchStatisticsEntity.setAgentName(matchStatisticsDTO.getAgentName());
         matchStatisticsEntity.setKills(matchStatisticsDTO.getKills());
@@ -32,7 +31,6 @@ public class MatchStatisticsConverter {
         // Take data in entity form and convert it to DTO to send it to controller layer.
         MatchStatisticsDTO matchStatisticsDTO = new MatchStatisticsDTO();
         matchStatisticsDTO.setId(matchStatisticsEntity.getId());
-        matchStatisticsDTO.setUserName(matchStatisticsEntity.getUserName());
         matchStatisticsDTO.setMatchID(matchStatisticsEntity.getMatchID());
         matchStatisticsDTO.setAgentName(matchStatisticsEntity.getAgentName());
         matchStatisticsDTO.setKills(matchStatisticsEntity.getKills());
