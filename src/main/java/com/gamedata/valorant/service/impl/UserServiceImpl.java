@@ -25,7 +25,16 @@ public class UserServiceImpl implements UserService {
     // Handles registration of a new user
     @Override
     public UserDTO register(UserDTO userDTO) {
-        UserEntity userEntity = userConverter.convertDTO(userDTO);
+        Optional<UserEntity> optionalUserEntity = userRepository.findByUserName(userDTO.getUserName());
+        if (optionalUserEntity.isPresent()){
+            List<ErrorModel> errorModelList =  new ArrayList<>();
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setCode("USERNAME_ALREADY_EXIST");
+            errorModel.setMessage("Username already exist. Please select new one.");
+            errorModelList.add(errorModel);
+            throw new BusinessException(errorModelList);
+        }
+        UserEntity  userEntity = userConverter.convertDTO(userDTO);
         userRepository.save(userEntity);
         return userConverter.convertEntity(userEntity);
     }
