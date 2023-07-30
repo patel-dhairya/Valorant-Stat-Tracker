@@ -25,7 +25,6 @@ public class CustomExceptionHandler {
         ErrorModel errorModel = null;
         List<FieldError> fieldErrorList = mav.getBindingResult().getFieldErrors();
         for (FieldError fieldError: fieldErrorList){
-            logger.debug("Inside field validation: {} - {}", fieldError.getField(), fieldError.getDefaultMessage());
             logger.info("Inside field validation: {} - {}", fieldError.getField(), fieldError.getDefaultMessage());
             errorModel = new ErrorModel();
             errorModel.setCode(fieldError.getField());
@@ -40,7 +39,6 @@ public class CustomExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<List<ErrorModel>> handleBusinessException(BusinessException businessException ){
         for (ErrorModel errorModel: businessException.getErrorModelList()) {
-            logger.debug("Business Exception : {} - {}", errorModel.getCode(), errorModel.getMessage());
             logger.info("Business Exception: {} - {}", errorModel.getCode(), errorModel.getMessage());
         }
         return new ResponseEntity<List<ErrorModel>>(businessException.getErrorModelList(), HttpStatus.BAD_REQUEST);
